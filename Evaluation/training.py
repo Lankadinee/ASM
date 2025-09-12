@@ -47,7 +47,8 @@ def train(data_path, model_folder, dataset):
                         df_rows = pd.read_csv(table_obj.csv_file_location,
                                             low_memory=False,
                                             keep_default_na=False,
-                                            na_values=['']
+                                            # na_values=[''],
+                                            on_bad_lines="skip"
                                             )
                     elif dataset == 'stats':
                         df_rows = pd.read_csv(table_obj.csv_file_location,

@@ -539,8 +539,8 @@ class NeuroCard(tune.Trainable):
         table_primary_index = None
 
         if self.PK_tuples_np_loc is not None:
-            import pickle5
-            PK_tuples_np = pickle5.load(open(self.PK_tuples_np_loc, "rb"))
+            import pickle
+            PK_tuples_np = pickle.load(open(self.PK_tuples_np_loc, "rb"))
         else:
             assert False
             PK_tuples_np = None

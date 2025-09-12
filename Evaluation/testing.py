@@ -1,4 +1,4 @@
-import pickle5 as pickle
+import pickle
 import sys
 import time
 import os

@@ -563,10 +563,10 @@ class NeuroCard(tune.Trainable):
         join_iter_dataset = None
         table_primary_index = None
 
-        import pickle5
-        PK_tuples_np = pickle5.load(open(self.PK_tuples_np_loc, "rb"))
+        import pickle
+        PK_tuples_np = pickle.load(open(self.PK_tuples_np_loc, "rb"))
         if hasattr(self, 'all_dvs_loc') and self.all_dvs_loc is not None:
-            all_dvs = pickle5.load(open(self.all_dvs_loc, "rb"))
+            all_dvs = pickle.load(open(self.all_dvs_loc, "rb"))
         else:
             all_dvs = None
 
@@ -1317,7 +1317,7 @@ if __name__ == '__main__':
         {
             k: {
                 'run': NeuroCard,
-                'checkpoint_at_end': True,
+                # 'checkpoint_at_end': True,
                 'resources_per_trial': {
                     'gpu': num_gpus,
                     'cpu': num_cpus,

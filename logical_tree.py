@@ -1,7 +1,7 @@
 import json
 import numpy as np
 import re
-import pickle5 as pickle
+import pickle
 import time
 from Join_scheme.data_prepare import get_imdb_schema
 

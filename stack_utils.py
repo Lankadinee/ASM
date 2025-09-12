@@ -1,4 +1,4 @@
-import pickle5 as pickle
+import pickle
 import sys
 
 all_sub_plan_queries = 'stack_queries/all_sub_plan_queries_str.pkl'

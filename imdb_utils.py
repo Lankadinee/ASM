@@ -1,5 +1,5 @@
-import pickle5 as pickle
-import sys
+import pickle
+
 
 all_sub_plan_queries = 'job_queries/all_sub_plan_queries_str.pkl'
 
