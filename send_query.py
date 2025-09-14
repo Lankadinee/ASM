@@ -3,9 +3,10 @@ import time
 import os
 import argparse
 import numpy as np
+import pandas as pd
 
 def send_query(dataset, method_name, query_file, save_folder, iteration=None):
-    conn = psycopg2.connect(database=dataset, user="postgres", password="postgres", host="localhost", port=5432)
+    conn = psycopg2.connect(database=dataset, user="postgres", password="postgres", host="172.17.0.1", port=5432)
     conn.set_client_encoding('UTF8')
     cursor = conn.cursor()
 
@@ -93,6 +94,7 @@ def send_query(dataset, method_name, query_file, save_folder, iteration=None):
 
     planning_time = [] 
     execution_time = []
+    total_time = []
 
     cumulative_time = 0
 
@@ -120,12 +122,14 @@ def send_query(dataset, method_name, query_file, save_folder, iteration=None):
             res = cursor.fetchall()
             planning_time.append(float(res[-2][0].split(":")[-1].split("ms")[0].strip()))
             execution_time.append(float(res[-1][0].split(":")[-1].split("ms")[0].strip()))
+            total_time.append(planning_time[no] + execution_time[no])
         except Exception as err:
             print(err)
             print("Type of error : ", type(err))
             timeout_queries_no.append(no)
             planning_time.append(0.0)
             execution_time.append(0.0)
+            total_time.append(0.0)
 
         filename = "query_" + str(no) + "_plan.txt"
         if iteration is not None: 
@@ -148,6 +152,19 @@ def send_query(dataset, method_name, query_file, save_folder, iteration=None):
         cumulative_time += (end - start)
         print("Expected Remaining Time by Extrapolation (sec) :", (num_total_queries - no - 1) * (cumulative_time / (no + 1)))
         print("Timeout Queries Number:", timeout_queries_no)
+
+        
+    df = pd.DataFrame(columns=["index", "planning_time", "execution_time", "total_time"])
+    df["index"] = range(len(planning_time))
+    df["planning_time"] = planning_time
+    df["execution_time"] = execution_time
+    df["total_time"] = total_time
+    df.to_csv(save_folder + f"result_{save_file_name}.csv", index=False)
+
+    print(f"Total number of queries: {len(df)}")
+    print("Average planning time: ", df["planning_time"].mean())
+    print("Average execution time: ", df["execution_time"].mean())
+    print("Average total time: ", df["total_time"].mean())
 
     cursor.close()
     conn.close()

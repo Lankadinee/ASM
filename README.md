@@ -5,11 +5,13 @@ The code is based on [NeuroCard](https://github.com/neurocard/neurocard) and [Fa
 
 ## Environment Setup for Model Training and Evaluation
 
-### Docker Setup for Model Training and Evaluation
 
-Clone the ASM repository and make a directory for datasets. For convenience, we explain running our scripts in a Docker container named "asm_test". 
+### ~~Docker Setup for Model Training and Evaluation~~
+
+~~Clone the ASM repository and make a directory for datasets. For convenience, we explain running our scripts in a Docker container named "asm_test".
 Run a Docker container with the continuumio/miniconda3 image with the conda installed. 
-Replace <shared_memory_size> with a sufficient memory size to run all scripts. (Check your dev/shm memory using df /dev/shm -h command)
+Replace <shared_memory_size> with a sufficient memory size to run all scripts. (Check your dev/shm memory using df /dev/shm -h command)~~
+
 
 ```
 git clone <git_repository_of_ASM>
@@ -20,9 +22,9 @@ mkdir datasets
 docker run -itd --network=host --gpus all --shm-size=<shared_memory_size> -v <path_to_asm>:/home --name asm_test continuumio/miniconda3 /bin/bash
 ```
 
-### Conda Environment Setup (This task should be run inside the asm_test Docker container)
+### ~~Conda Environment Setup (This task should be run inside the asm_test Docker container)~~
 
-Inside the asm_test Docker container, set up the conda environment as follows:
+~~Inside the asm_test Docker container, set up the conda environment as follows:~~
 
 ```
 cd /home
@@ -30,6 +32,16 @@ apt-get update
 apt-get install zip unzip gcc g++
 conda env create --file ASM.yml
 conda activate ASM
+```
+<span style="color:red"> Note: We removed the docker creation and used the local environment to run the test_ASM scripts, please refer the below env creaton </span>
+
+### Install dependancies
+
+Note: We upgraded all the packages from python 3.7 to 3.12
+```
+pip install uv
+
+uv sync
 ```
 
 ## Environment Setup for End-to-End Performance Measurement

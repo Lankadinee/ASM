@@ -13,4 +13,7 @@ sub_plan_file=job_queries/all_sub_plan_queries_str.pkl
 save=$dir/result
 log=$dir/evaluate.log
 
-python run_experiment.py --dataset imdb --evaluate --ar_path $ar_path --model_path $model_path --config_path $config_path --query_file $query_file  --query_sub_plan_file $sub_plan_file --save_folder $save --query_predicate_location $predicate > $log
+echo "python run_experiment.py --dataset imdb --evaluate --ar_path $ar_path --model_path $model_path --config_path $config_path --query_file $query_file  --query_sub_plan_file $sub_plan_file --save_folder $save --query_predicate_location $predicate"
+
+
+uv run run_experiment.py --dataset imdb --evaluate --ar_path $ar_path --model_path $model_path --config_path $config_path --query_file $query_file  --query_sub_plan_file $sub_plan_file --save_folder $save --query_predicate_location $predicate  > $log

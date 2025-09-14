@@ -713,7 +713,7 @@ class NeuroCard(tune.Trainable):
         all_ckpts = glob.glob(self.checkpoint_to_load)
         msg = f'No ckpt found or use tune.grid_search() for >1 ckpts: {self.checkpoint_to_load}'
         assert len(all_ckpts) == 1, msg
-        loaded = torch.load(all_ckpts[0])
+        loaded = torch.load(all_ckpts[0], weights_only=False)
         # try:
         if isinstance(self.model, DataParallelPassthrough):
             self.model.module.load_state_dict(loaded['model_state_dict'])
