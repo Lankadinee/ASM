@@ -86,7 +86,7 @@ def train(data_path, model_folder, dataset):
             elif dataset == 'imdb':
                 dfs_PKs = ['title.id', 'kind_type.id', 'comp_cast_type.id', 'info_type.id', 'name.id', 'char_name.id', 'role_type.id', 'link_type.id', 'keyword.id', 'company_name.id', 'company_type.id']
             elif dataset == 'stats':
-                dfs_PKs = ['users.Id', 'posts.Id']
+                dfs_PKs = ['users.id', 'posts.id']
             else:
                 assert False
         else:
@@ -98,7 +98,7 @@ def train(data_path, model_folder, dataset):
             elif dataset == 'imdb':
                 start_PK = 'title.id'
             elif dataset == 'stats':
-                start_PK = 'users.Id'
+                start_PK = 'users.id'
             else:
                 assert False
             dfs_PKs = dfs(start_PK, schema, equivalent_keys, None, [])

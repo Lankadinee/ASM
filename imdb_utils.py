@@ -17,6 +17,8 @@ def qindex_to_qname(index):
     return None
 
 def qname_to_qindex(qname):
+    if qname.startswith('q') and qname[1:].isdigit():
+        return int(qname[1:])
     all_pairs = pickle.load(open(all_sub_plan_queries, "rb"))
 
     i = 0

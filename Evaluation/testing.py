@@ -140,11 +140,11 @@ def test(model_path,
             else:
                 assert False
 
-            df = pd.DataFrame(columns = ['id', 'name', 'q_time', 'm_time', 's_time'])
+            rows = []
             for q_name in res:
-                df = df.append({'id': qname_to_qindex(q_name), 'name': q_name,
-                                'q_time': q_times[q_name], 'm_time': m_times[q_name], 's_time': s_times[q_name]},
-                               ignore_index = True)
+                rows.append({'id': qname_to_qindex(q_name), 'name': q_name,
+                             'q_time': q_times[q_name], 'm_time': m_times[q_name], 's_time': s_times[q_name]})
+            df = pd.DataFrame(rows, columns = ['id', 'name', 'q_time', 'm_time', 's_time'])
             df = df.sort_values(by=['id'])
             df.to_csv(save_res + f'.time.csv')
 

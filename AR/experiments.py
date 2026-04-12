@@ -211,12 +211,12 @@ for table in IMDB_FULL['join_tables']:
     EXPERIMENT_CONFIGS[f'imdb-single-{table}'] = dict(EXPERIMENT_CONFIGS['syn-single-00-dist'])
 
     EXPERIMENT_CONFIGS[f'imdb-single-{table}']['fc_hiddens'] = 128
-    EXPERIMENT_CONFIGS[f'imdb-single-{table}']['epochs'] = 20
+    EXPERIMENT_CONFIGS[f'imdb-single-{table}']['epochs'] = 100
 
     EXPERIMENT_CONFIGS[f'imdb-single-{table}']['checkpoint_every_epoch'] = True
     EXPERIMENT_CONFIGS[f'imdb-single-{table}']['save_checkpoint_at_end'] = False
 
-    EXPERIMENT_CONFIGS[f'imdb-single-{table}']['eval_psamples'] = [2048]
+    EXPERIMENT_CONFIGS[f'imdb-single-{table}']['eval_psamples'] = [8192]
     EXPERIMENT_CONFIGS[f'imdb-single-{table}']['dataset'] = 'imdb'
     EXPERIMENT_CONFIGS[f'imdb-single-{table}']['data_dir'] = f'datasets/imdb/{table}/'
     EXPERIMENT_CONFIGS[f'imdb-single-{table}']['use_cols'] = None
@@ -258,18 +258,18 @@ for table in ['account', 'answer', 'question', 'site', 'so_user', 'tag', 'tag_qu
     TEST_CONFIGS[f'stack-single-{table}_infer']['queries_csv'] = ""
 
 
-for table in ['badges', 'comments', 'postHistory', 'postLinks', 'posts', 'tags', 'users', 'votes']:
+for table in ['badges', 'comments', 'posthistory', 'postlinks', 'posts', 'tags', 'users', 'votes']:
     EXPERIMENT_CONFIGS[f'stats-single-{table}'] = dict(EXPERIMENT_CONFIGS['syn-single-00-dist'])
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['fc_hiddens'] = 32
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['embed_size'] = 5
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['layers'] = 3
-    EXPERIMENT_CONFIGS[f'stats-single-{table}']['epochs'] = 7
+    EXPERIMENT_CONFIGS[f'stats-single-{table}']['epochs'] = 100
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['sampler_batch_size'] = 1024 * 4
 
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['checkpoint_every_epoch'] = True
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['save_checkpoint_at_end'] = False
 
-    EXPERIMENT_CONFIGS[f'stats-single-{table}']['eval_psamples'] = [2048]
+    EXPERIMENT_CONFIGS[f'stats-single-{table}']['eval_psamples'] = [8192]
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['dataset'] = 'stats'
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['data_dir'] = f'datasets/stats/{table}/'
     EXPERIMENT_CONFIGS[f'stats-single-{table}']['use_cols'] = None

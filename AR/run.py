@@ -59,7 +59,7 @@ parser.add_argument('--cpus',
 parser.add_argument(
     '--gpus',
     default=1,
-    type=int,
+    type=float,
     required=False,
     help='Number of GPUs per trial. No effect if no GPUs are available.')
 
@@ -1271,7 +1271,7 @@ if __name__ == '__main__':
         assert k in experiments.EXPERIMENT_CONFIGS, 'Available: {} not in {}'.format(k,
             list(experiments.EXPERIMENT_CONFIGS.keys()))
 
-    num_gpus = 1 # args.gpus if torch.cuda.is_available() else 0  TODO - Check why didnt work
+    num_gpus = args.gpus if torch.cuda.is_available() else 0
     num_cpus = args.cpus
     external = args.external
 
