@@ -281,6 +281,52 @@ for table in ['badges', 'comments', 'posthistory', 'postlinks', 'posts', 'tags',
     TEST_CONFIGS[f'stats-single-{table}_infer'] = dict(EXPERIMENT_CONFIGS[f'stats-single-{table}'])
     TEST_CONFIGS[f'stats-single-{table}_infer']['queries_csv'] = ""
 
+for table in ['region', 'nation', 'supplier', 'customer', 'part', 'partsupp', 'orders', 'lineitem']:
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}'] = dict(EXPERIMENT_CONFIGS['syn-single-00-dist'])
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['fc_hiddens'] = 32
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['embed_size'] = 5
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['layers'] = 3
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['epochs'] = 100
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['sampler_batch_size'] = 1024 * 4
+
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['checkpoint_every_epoch'] = True
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['save_checkpoint_at_end'] = False
+
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['eval_psamples'] = [8192]
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['dataset'] = 'tpch_skewed'
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['data_dir'] = f'datasets/tpch_skewed/{table}/'
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['use_cols'] = None
+
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['PK_tuples_np_loc'] = f'datasets/tpch_skewed/{table}/tuples_np.pkl'
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['subvar_dropout'] = True
+    EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}']['adjust_fact_col'] = True
+
+    TEST_CONFIGS[f'tpch_skewed-single-{table}_infer'] = dict(EXPERIMENT_CONFIGS[f'tpch_skewed-single-{table}'])
+    TEST_CONFIGS[f'tpch_skewed-single-{table}_infer']['queries_csv'] = ""
+
+for table in ['region', 'nation', 'supplier', 'customer', 'part', 'partsupp', 'orders', 'lineitem']:
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}'] = dict(EXPERIMENT_CONFIGS['syn-single-00-dist'])
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['fc_hiddens'] = 32
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['embed_size'] = 5
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['layers'] = 3
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['epochs'] = 100
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['sampler_batch_size'] = 1024 * 4
+
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['checkpoint_every_epoch'] = True
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['save_checkpoint_at_end'] = False
+
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['eval_psamples'] = [8192]
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['dataset'] = 'tpch_uniform'
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['data_dir'] = f'datasets/tpch_uniform/{table}/'
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['use_cols'] = None
+
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['PK_tuples_np_loc'] = f'datasets/tpch_uniform/{table}/tuples_np.pkl'
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['subvar_dropout'] = True
+    EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}']['adjust_fact_col'] = True
+
+    TEST_CONFIGS[f'tpch_uniform-single-{table}_infer'] = dict(EXPERIMENT_CONFIGS[f'tpch_uniform-single-{table}'])
+    TEST_CONFIGS[f'tpch_uniform-single-{table}_infer']['queries_csv'] = ""
+
 for name in TEST_CONFIGS:
     TEST_CONFIGS[name].update({'save_checkpoint_at_end': False})
     TEST_CONFIGS[name].update({'mode': 'INFERENCE'})

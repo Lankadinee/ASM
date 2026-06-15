@@ -10,7 +10,7 @@ import pickle
 import re
 from collections import defaultdict
 
-PRICE_WORKLOAD = "/home/student.unimelb.edu.au/lrathuwadu/PRICE/datas/workloads/test/imdb/workloads.sql"
+PRICE_WORKLOAD = "/home/student.unimelb.edu.au/lrathuwadu/cardinality-estimation-data/processed_data/imdb/workloads.sql"
 OUT_DIR = "/home/student.unimelb.edu.au/lrathuwadu/ASM/jobl_queries"
 PRED_DIR = f"{OUT_DIR}/predicate"
 

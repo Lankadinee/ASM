@@ -137,6 +137,10 @@ def test(model_path,
                 from imdb_utils import qname_to_qindex
             elif dataset == 'stats':
                 from stats_utils import qname_to_qindex
+            elif dataset == 'tpch_skewed':
+                from tpch_utils import qname_to_qindex
+            elif dataset == 'tpch_uniform':
+                from tpch_utils import qname_to_qindex
             else:
                 assert False
 

@@ -43,7 +43,9 @@ def train(data_path, model_folder, dataset):
             else:
                 if os.path.exists(table_obj.csv_file_location):
                     print("reading", table_obj.csv_file_location)
-                    if dataset == 'imdb':
+                    if table_obj.csv_file_location.endswith('.parquet'):
+                        df_rows = pd.read_parquet(table_obj.csv_file_location)
+                    elif dataset == 'imdb':
                         df_rows = pd.read_csv(table_obj.csv_file_location,
                                             low_memory=False,
                                             keep_default_na=False,
@@ -87,6 +89,12 @@ def train(data_path, model_folder, dataset):
                 dfs_PKs = ['title.id', 'kind_type.id', 'comp_cast_type.id', 'info_type.id', 'name.id', 'char_name.id', 'role_type.id', 'link_type.id', 'keyword.id', 'company_name.id', 'company_type.id']
             elif dataset == 'stats':
                 dfs_PKs = ['users.id', 'posts.id']
+            elif dataset == 'tpch_skewed':
+                dfs_PKs = ['region.r_regionkey', 'nation.n_nationkey', 'supplier.s_suppkey',
+                           'part.p_partkey', 'customer.c_custkey', 'orders.o_orderkey']
+            elif dataset == 'tpch_uniform':
+                dfs_PKs = ['region.r_regionkey', 'nation.n_nationkey', 'supplier.s_suppkey',
+                           'part.p_partkey', 'customer.c_custkey', 'orders.o_orderkey']
             else:
                 assert False
         else:
@@ -99,6 +107,10 @@ def train(data_path, model_folder, dataset):
                 start_PK = 'title.id'
             elif dataset == 'stats':
                 start_PK = 'users.id'
+            elif dataset == 'tpch_skewed':
+                start_PK = 'region.r_regionkey'
+            elif dataset == 'tpch_uniform':
+                start_PK = 'region.r_regionkey'
             else:
                 assert False
             dfs_PKs = dfs(start_PK, schema, equivalent_keys, None, [])
@@ -160,7 +172,7 @@ def train(data_path, model_folder, dataset):
 
             reorder_time += time.time() - reorder_time_start
 
-            table_dir = data_path.format(table)[:-4]
+            table_dir = os.path.splitext(data_path.format(table))[0]
             table_path = table_dir + '/table0.csv'
 
             if True:
@@ -173,6 +185,8 @@ def train(data_path, model_folder, dataset):
                         query = "select * from " + table_obj.table_name + " ;"
                         print(query)
                         df_rows = pd.read_sql(query, conn)
+                    elif table_obj.csv_file_location.endswith('.parquet'):
+                        df_rows = pd.read_parquet(table_obj.csv_file_location)
                     elif dataset == 'imdb':
                         df_rows = pd.read_csv(table_obj.csv_file_location,
                                             low_memory=False,

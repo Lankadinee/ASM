@@ -9,7 +9,7 @@ import pandas as pd
 import collections
 from common import CsvTable
 
-dataset_list = ['imdb', 'stack', 'stats', 'stack_ss100']
+dataset_list = ['imdb', 'stack', 'stats', 'stack_ss100', 'tpch_skewed', 'tpch_uniform']
 
 def LoadImdb(table=None,
              data_dir='./datasets/job_csv_export/',
@@ -64,6 +64,6 @@ def LoadImdb(table=None,
     assert False
 
 def LoadDataset(dataset, table, use_cols, data_dir, try_load_parsed=True, pre_add_noise=False, pre_normalize=False, post_normalize=True, irr_attrs=[], PK_tuples_np=None, all_dvs=None):
-    if dataset in ['imdb', 'stack', 'stats', 'stack_ss100']:
+    if dataset in ['imdb', 'stack', 'stats', 'stack_ss100', 'tpch_skewed', 'tpch_uniform']:
         return LoadImdb(table, data_dir=data_dir,try_load_parsed=try_load_parsed, use_cols=use_cols, irr_attrs=irr_attrs, PK_tuples_np=PK_tuples_np, all_dvs=all_dvs)
     assert False

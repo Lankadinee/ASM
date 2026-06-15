@@ -46,7 +46,7 @@ if __name__ == '__main__':
         ])
     logger = logging.getLogger(__name__)
 
-    if args.dataset in ['imdb', 'stack', 'stats', 'stack_ss100']:
+    if args.dataset in ['imdb', 'stack', 'stats', 'stack_ss100', 'tpch_skewed', 'tpch_uniform']:
         if args.generate_models:
             bound_ensemble = train(args.data_path, args.model_path, args.dataset)
         elif args.evaluate:

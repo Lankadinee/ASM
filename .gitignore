@@ -9,3 +9,10 @@ results
 sample_tuples
 logs
 **/__pycache__/
+*.sh
+*.tar
+*.q*
+*.csv
+*.log
+*.l*
+
